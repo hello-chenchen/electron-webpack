@@ -1,0 +1,22 @@
+{
+  "name": "electron-webpack",
+  "version": "0.0.1",
+  "description": "based on electron and webpack",
+  "scripts": {
+    "start": "electron ./src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hello-chenchen/electron-webpack.git"
+  },
+  "author": "hello_chenchen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hello-chenchen/electron-webpack/issues"
+  },
+  "homepage": "https://github.com/hello-chenchen/electron-webpack#readme",
+  "devDependencies": {
+    "electron": "^3.0.12"
+  }
+}
