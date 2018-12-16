@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/hello-chenchen/electron-webpack#readme",
   "devDependencies": {
-    "electron": "^3.0.12"
+    "electron": "^3.0.12",
+    "eslint": "^5.10.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
   }
 }
