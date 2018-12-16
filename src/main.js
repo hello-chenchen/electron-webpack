@@ -11,7 +11,6 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  console.log('hello_chenchen ' + __dirname + '/index.html');
   let htmlFile = __dirname + '/index.html';
   mainWindow.loadFile(htmlFile);
 
