@@ -9,15 +9,23 @@ const commonConfig = {
     publicPath: '/dist/'
   },
   devtool: 'inline-source-map',
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({template: './public/index.html', filename: 'index.html'})
-  ],
   node: {
     __dirname: false
   },
   stats: {//solve bug https://github.com/jantimon/html-webpack-plugin/issues/895
     children: false
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
   }
 };
 
@@ -25,7 +33,20 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-main',
-      entry: { main: './src/main.js' }
+      entry: { main: './src/main.js' },
+      plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({template: './public/index.html', filename: 'index.html'})
+      ]
+    },
+    commonConfig),
+  Object.assign(
+    {
+      target: 'electron-renderer',
+      entry: {
+        index: './src/ui/index.jsx',
+        MainWindows: './src/ui/MainWindows.jsx'
+      }
     },
     commonConfig)
 ];
