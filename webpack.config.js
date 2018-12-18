@@ -24,6 +24,29 @@ const commonConfig = {
             loader: 'babel-loader'
           }
         ]
+      },
+      { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' },
+      { test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader'
+        }
       }
     ]
   }
