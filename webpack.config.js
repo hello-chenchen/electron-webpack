@@ -12,7 +12,7 @@ const commonConfig = {
   node: {
     __dirname: false
   },
-  stats: {//solve bug https://github.com/jantimon/html-webpack-plugin/issues/895
+  stats: {//FIXED: https://github.com/jantimon/html-webpack-plugin/issues/895
     children: false
   },
   module: {
@@ -41,12 +41,6 @@ const commonConfig = {
             }
           }
         ]
-      },
-      {
-        test: /\.(html)$/,
-        use: {
-          loader: 'html-loader'
-        }
       }
     ]
   }
@@ -55,21 +49,27 @@ const commonConfig = {
 module.exports = [
   Object.assign(
     {
-      target: 'electron-main',
-      entry: { main: './src/main.js' },
+      target: "electron-main",
+      entry: { main: "./src/main.js" },
       plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({template: './public/index.html', filename: 'index.html'})
+        new CleanWebpackPlugin(["dist"]),
+        new HtmlWebpackPlugin({
+          template: "./public/index.html",
+          filename: "index.html",
+          inject: false //FIXED: https://github.com/petehunt/webpack-howto/issues/46#issuecomment-164285430
+        })
       ]
     },
-    commonConfig),
+    commonConfig
+  ),
   Object.assign(
     {
-      target: 'electron-renderer',
+      target: "electron-renderer",
       entry: {
-        index: './src/ui/index.jsx',
-        MainWindows: './src/ui/MainWindows.jsx'
+        index: "./src/ui/index.jsx",
+        MainWindows: "./src/ui/MainWindows.jsx"
       }
     },
-    commonConfig)
+    commonConfig
+  )
 ];
