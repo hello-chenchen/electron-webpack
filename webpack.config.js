@@ -9,23 +9,67 @@ const commonConfig = {
     publicPath: '/dist/'
   },
   devtool: 'inline-source-map',
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({template: './public/index.html', filename: 'index.html'})
-  ],
   node: {
     __dirname: false
   },
-  stats: {//solve bug https://github.com/jantimon/html-webpack-plugin/issues/895
+  stats: {//FIXED: https://github.com/jantimon/html-webpack-plugin/issues/895
     children: false
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      },
+      { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' },
+      { test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
+      }
+    ]
   }
 };
 
 module.exports = [
   Object.assign(
     {
-      target: 'electron-main',
-      entry: { main: './src/main.js' }
+      target: "electron-main",
+      entry: { main: "./src/main.js" },
+      plugins: [
+        new CleanWebpackPlugin(["dist"]),
+        new HtmlWebpackPlugin({
+          template: "./public/index.html",
+          filename: "index.html",
+          inject: false //FIXED: https://github.com/petehunt/webpack-howto/issues/46#issuecomment-164285430
+        })
+      ]
     },
-    commonConfig)
+    commonConfig
+  ),
+  Object.assign(
+    {
+      target: "electron-renderer",
+      entry: {
+        index: "./src/ui/index.jsx",
+        MainWindows: "./src/ui/MainWindows.jsx"
+      }
+    },
+    commonConfig
+  )
 ];
