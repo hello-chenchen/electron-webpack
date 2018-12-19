@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button } from 'antd';  //FIXED: https://github.com/ant-design/ant-design/issues/4618#issuecomment-309258697
 import 'antd/dist/antd.less';
 class MainWindows extends React.Component {
   render() {
-    console.log('hello_chenchen1' + Button);
     return <Button type="primary">Button</Button>;
   }
 }
