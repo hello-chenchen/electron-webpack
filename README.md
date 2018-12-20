@@ -1,2 +1,2 @@
-# electron-webpack
-based on electron and webpack
+# electron-webpack-antd
+demo based on electron, webpack and antd
